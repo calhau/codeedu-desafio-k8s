@@ -1,0 +1,30 @@
+steps:
+
+- id: "Rodando docker-compose"
+  name: 'gcr.io/$PROJECT_ID/docker-compose'
+  args: ['-f', 'docker-compose.cloudbuild.yaml', 'up', '-d']  
+
+- id: "Rodando docker ps"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['ps']  
+
+- id: "Rodando o test da app GO"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec', '-t', 'app', 'go', 'test']  
+
+- id: "Rodando o gerar binario"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec', '-t', 'app', 'go', 'buil','bruno.go']  
+
+- id: "Gerar build da imagem"
+  name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/desafio-k8s:latest'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/desafio-k8s:0.0.1'
+  - '.'
+
+images:
+- 'gcr.io/$PROJECT_ID/desafio-k8s:0.0.1'
