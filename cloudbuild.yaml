@@ -10,7 +10,7 @@ steps:
 
 - id: "Rodando o ls app GO"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t', 'k8s-desafio-03-go', 'ls', 'test']    
+  args: ['exec', '-t', 'k8s-desafio-03-go', 'ls']    
 
 - id: "Rodando o test da app GO"
   name: 'gcr.io/cloud-builders/docker'
