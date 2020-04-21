@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf-configmap-desafio-1
+data:
+  nginx.conf-key: |
+
+    server {
+      listen 80;
+      index index.php index.html;
+      root /usr/share/nginx/html;
+
+      rewrite ^/google$ http://google.com permanent;
+    }
+
+  nginx.html-key: |
+    <h3 style="color:green">Code.education Rocks</h3>  

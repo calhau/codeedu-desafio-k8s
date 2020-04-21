@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-bruno-desafio-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-template-label-desafio-1
+  template:
+    metadata:
+      labels:
+        app: nginx-template-label-desafio-1
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:1.17-alpine
+        ports:
+        - containerPort: 80
+
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-conf-volume-nginxconf-desafio-1
+          readOnly: true
+        - mountPath: /usr/share/nginx/html
+          name: nginx-conf-volume-nginxhtml-desafio-1
+          readOnly: true
+
+      volumes:
+      - name: nginx-conf-volume-nginxconf-desafio-1
+        configMap:
+          name: nginx-conf-configmap-desafio-1
+          items:
+          - key: nginx.conf-key
+            path: nginx.conf
+      - name: nginx-conf-volume-nginxhtml-desafio-1
+        configMap:
+          name: nginx-conf-configmap-desafio-1
+          items:
+          - key: nginx.html-key
+            path: index.html
+      

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-deployment-bruno-desafio-3
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: go-template-label-desafio-3
+  template:
+    metadata:
+      labels:
+        app: go-template-label-desafio-3
+    spec:
+      containers:
+      - name: go-container
+        image: lealbruno/codeedu-k8s-03-go:latest
+        ports:
+        - containerPort: 8000
