@@ -8,6 +8,10 @@ Caso tenham algo a acrescentar, será um prazer escutar!
 - **Baixar imagem**  
 - docker push lealbruno/codeedu-k8s-03-go:latest  
 
+
+###### Importante
+O Dockerfile que está na raiz, é referente apenas ao processo de CI.
+
 ==================================================================
 ## Desafio Instruções
 #### 01
