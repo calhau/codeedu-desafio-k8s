@@ -10,12 +10,22 @@ steps:
 
 - id: "Rodando o ls app GO"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t', 'k8s-desafio-03-go', 'ls']    
+  args: ['exec', '-t', 'k8s-desafio-03-go', 'ls', 'test']    
+
+- id: "Rodando o test da app GO"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['exec', '-t', 'k8s-desafio-03-go', 'go', 'test']  
 
 - id: "Rodando o gerar binario"
   name: 'gcr.io/cloud-builders/docker'
   args: ['exec', '-t', 'k8s-desafio-03-go', 'go', 'build','bruno.go']  
 
-- id: "Rodando o test da app GO"
+- id: "Gerar build da imagem"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t', 'k8s-desafio-03-go', 'go', 'test']  
+  args:
+  - 'build'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/desafio-k8s:0.0.1'
+  - '.'
+images:
+- 'gcr.io/$PROJECT_ID/desafio-k8s:0.0.1'
